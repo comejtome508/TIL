@@ -6,4 +6,4 @@
 
 ## ETC
 
-  * [Advice](./ETC/Advice)
+  * [Advice](/ETC/Advice)
