@@ -1,0 +1,40 @@
+## 진행한 것
+    - 그래프에서 zoom 버튼과 그래프 화면 분리해서 같이 움직이지 않도록 진행
+    - 기존에 업로드 된 git에 합침
+
+
+## 새로 배운 것 & 알게 된 것
+    - 
+    No overload matches this call.
+
+The last overload gave the following error.
+
+Argument of type 'Transition<BaseType, unknown, HTMLElement, any>' is not assignable to parameter of type 'TransitionLike<Element, unknown>'.
+
+The types returned by 'selection()' are incompatible between these types.
+
+Type 'Selection<BaseType, unknown, HTMLElement, any>' is not assignable to type 'Selection<Element, unknown, any, any>'.
+
+Type 'BaseType' is not assignable to type 'Element'.
+
+Type 'EnterElement' is missing the following properties from type 'Element': attributes, classList, className, clientHeight, and 117 more.ts(2769)
+
+- 위의 에러는 타입에러였는데 svg 선언한 곳에 타입을 any로 추가해주니까 해결이 되었다.
+- 줌버튼 문제
+  - 줌 버튼과 node/link를 따로 g로 나누고 first-child로 처리하니까 일단 줌 버튼 클래스가 분리가 되었다. 그러나 문제는 zoom을 할 때 같이 움직이는 것
+      -> 해결 : svg를 선언한 뒤 canvas라는 변수를 두어서 거기다가 추가적으로 zoom 함수를 call하고 g를 넣었는데 node와 link를 그릴 때 svg를 canvas로 값을 바꿔도 여전히 해결이 되지 않았다.
+                그런데 결국 zoom을 부르는 함수에서 zoom의 transform을 하기 때문에 거기에 있는 svg를 canvas로 바꾸니까 해결되었다.
+  
+- 기존 프로젝트 코드에 합치면서 d3를 다시 설치하니까 v6로 설치되면서 기존 event 코드나 json을 부르는 코드, 색상 코드가 이전 버전에 맞는 형태여서 에러가 났다.
+  - event는 함수의 인자로 넣어주는 형태로 바뀜
+  - json을 부를 때는 함수 형태에서 promise 형태로 바꿔줘야 함
+  - schemeCategory20은 v6에서 사라짐
+
+## 개선해야 할 것 & 해야할 것
+    - 현재 진행하는 프로젝트 뼈대 코드 분석하고 common 코드나 router 코드 같은 것들 정확하게 파악하기
+    - angular 주요 개념들 익숙할 수 있게 연습하고 회사 프로젝트 코드에서 어떻게 활용했는지 살펴보기
+
+
+## 느낀 것
+    - 풀리지 않는 문제가 생겼을 때 개념을 정확하게 파악하고 정리한 다음 문제를 진단해야 한다. 풀릴때까지 코드들을 막 때려넣는 식으로 해결하려고 하는 좋지 않은 습관 버려야 한다.
+     
